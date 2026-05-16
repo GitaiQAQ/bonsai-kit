@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>bonsai-kit · composed</title>
+  <style>
+    body { font-family: -apple-system, sans-serif; padding: 24px; background: #0f172a; color: #cbd5e1; }
+    h1 { color: #fff; }
+    code { background: #1e293b; padding: 2px 6px; border-radius: 4px; }
+    .btn { background: #1e293b; color: #fff; border: 1px solid #334155; padding: 6px 12px; border-radius: 6px; cursor: pointer; margin: 4px; }
+    .btn:hover { background: #334155; }
+  </style>
+</head>
+<body>
+  <h1>bonsai-kit composed devtools</h1>
+  <p>Click the FAB at bottom-right to toggle the panel. Try the dock at top-right.</p>
+  <p>To populate VMOK demo data, run in console:
+    <code>window.__VMOK__ = { moduleInfo: { 'ttam-main': { version:'1.2.3', buildVersion:'20260513' } } }</code>
+  </p>
+
+  <bk-floating-button id="fab" icon="⚙" label="Open devtools" storage-key="dev-fab" bottom="24px" right="24px"></bk-floating-button>
+
+  <bk-dock-bar id="dock" storage-key="dev-dock" top="24px" right="24px"></bk-dock-bar>
+
+  <bk-resizable-panel id="main" title="Devtools" badge="" storage-key="dev-main"
+                      collapsed top="80px" right="24px" min-width="320" max-width="640">
+    <bk-tabs-view id="tabs" active="modules">
+      <div data-tab="modules" data-label="Modules">
+        <bk-vmok-inspector id="vmok" panel-title="" storage-key="dev-vmok" style="display:contents"></bk-vmok-inspector>
+      </div>
+      <div data-tab="settings" data-label="Settings">
+        <bk-setting-panel id="settings" storage-key="dev-settings"></bk-setting-panel>
+      </div>
+      <div data-tab="actions" data-label="Actions">
+        <button class="btn" id="act-clear">Clear localStorage</button>
+        <button class="btn" id="act-toast">Show toast</button>
+      </div>
+    </bk-tabs-view>
+  </bk-resizable-panel>
+
+  <script type="module">
+    import { toast, confirm } from '../src/index.js';
+
+    const main = document.getElementById('main');
+    document.getElementById('fab').addEventListener('fab-click', () => main.toggleAttribute('collapsed'));
+
+    const dock = document.getElementById('dock');
+    dock.items = [
+      { id: 'refresh', icon: '⟳', label: 'Refresh' },
+      { id: 'export',  icon: '⇩', label: 'Export', variant: 'primary' },
+      { id: 'reset',   icon: '✕', label: 'Reset',  variant: 'danger' },
+    ];
+    dock.addEventListener('dock-action', async (e) => {
+      const { id } = e.detail;
+      if (id === 'refresh') toast('Refreshed', { type: 'success' });
+      if (id === 'export')  toast('Exported config.json');
+      if (id === 'reset') {
+        if (await confirm('Reset all dev settings?', { danger: true, okText: 'Reset' })) {
+          localStorage.clear(); toast('Settings cleared', { type: 'warn' });
+        }
+      }
+    });
+
+    const vmok = document.getElementById('vmok');
+    vmok.fields  = [{ key: 'buildVersion', className: 'build' }, { key: 'version', className: 'version' }];
+    vmok.filters = ['ttam-main', 'campaign-creation', 'creation-form-vue'];
+
+    const settings = document.getElementById('settings');
+    settings.schema = [
+      { group: 'Display', key: 'theme', label: 'Theme', type: 'select',
+        options: [{label:'Dark',value:'dark'},{label:'Light',value:'light'}], default: 'dark' },
+      { group: 'Display', key: 'compact', label: 'Compact mode', type: 'switch', default: true,
+        help: 'Reduce padding everywhere' },
+      { group: 'VMOK', key: 'interval', label: 'Poll interval (ms)', type: 'number', default: 1500 },
+      { group: 'VMOK', key: 'filters', label: 'Module filters', type: 'tags',
+        placeholder: 'ttam, creation, ...' },
+      { group: 'Advanced', key: 'note', label: 'Notes', type: 'textarea' },
+    ];
+
+    document.getElementById('act-clear').onclick = async () => {
+      if (await confirm('Really clear?', { danger: true })) { localStorage.clear(); toast('Done'); }
+    };
+    document.getElementById('act-toast').onclick = () => toast('Hello from bonsai-kit!', { type: 'success' });
+  </script>
+</body>
+</html>

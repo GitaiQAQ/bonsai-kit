@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>bonsai-kit · standalone</title>
+</head>
+<body style="background:#0f172a;color:#cbd5e1;font-family:-apple-system,sans-serif;padding:24px;">
+  <h1 style="color:#fff">Standalone primitives</h1>
+  <p>Each component used in isolation, demonstrating zero coupling.</p>
+
+  <bk-resizable-panel title="Solo panel" badge="(0)" storage-key="solo">
+    <bk-module-list id="ml"></bk-module-list>
+  </bk-resizable-panel>
+
+  <script type="module">
+    import { VmokSource } from '../src/index.js';
+    const ml = document.getElementById('ml');
+    ml.fields = [{ key: 'version', className: 'version' }];
+    const src = new VmokSource({ fields: ['version'] });
+    src.subscribe((items) => ml.items = items);
+    src.start();
+  </script>
+</body>
+</html>

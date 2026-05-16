@@ -1,0 +1,84 @@
+{
+  "name": "bonsai-kit",
+  "version": "0.0.11",
+  "description": "A standard Web Components UI kit for userscript authors — Shadow-DOM-isolated, zero-dependency primitives (floating panels, FABs, dock bars, settings, toasts, dialogs) that work safely inside any host page. Tampermonkey / Violentmonkey / Greasemonkey ready.",
+  "type": "module",
+  "main": "./src/index.js",
+  "module": "./src/index.js",
+  "types": "./types/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./types/index.d.ts",
+      "import": "./src/index.js",
+      "default": "./src/index.js"
+    },
+    "./components/*": "./src/components/*.js",
+    "./sources/*": "./src/sources/*.js",
+    "./utils/*": "./src/utils/*.js",
+    "./internal/*": "./src/internal/*.js",
+    "./dist/umd": "./dist/bonsai-kit.umd.min.js",
+    "./dist/esm": "./dist/bonsai-kit.esm.min.js",
+    "./dist/userscript": "./dist/bonsai-kit.user.js",
+    "./dist/components/*": "./dist/components/*.umd.min.js"
+  },
+  "files": [
+    "src",
+    "dist",
+    "types",
+    "userscripts",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "node scripts/build.js",
+    "build:types": "tsc -p tsconfig.json",
+    "dev": "node scripts/dev-server.js",
+    "test": "node --test test/",
+    "lint": "eslint src/ test/",
+    "format": "prettier --write \"src/**/*.{js,md}\" \"test/**/*.js\"",
+    "new:component": "node scripts/new-component.js",
+    "release": "changeset publish",
+    "version": "changeset version",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "web-components",
+    "custom-elements",
+    "shadow-dom",
+    "userscript",
+    "tampermonkey",
+    "violentmonkey",
+    "greasemonkey",
+    "ui-kit",
+    "ui-components",
+    "floating-panel",
+    "fab",
+    "toast",
+    "dialog",
+    "zero-dependency",
+    "bonsai-kit"
+  ],
+  "homepage": "https://github.com/GitaiQAQ/bonsai-kit#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GitaiQAQ/bonsai-kit.git"
+  },
+  "bugs": {
+    "url": "https://github.com/GitaiQAQ/bonsai-kit/issues"
+  },
+  "author": "GitaiQAQ",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18"
+  },
+  "devDependencies": {
+    "@changesets/cli": "^2.27.0",
+    "esbuild": "^0.21.0",
+    "eslint": "^9.0.0",
+    "prettier": "^3.2.0",
+    "typescript": "^5.4.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

@@ -1,0 +1,30 @@
+name: Component proposal
+description: Propose a new <bk-*> component or improvement
+title: "[component] "
+labels: ["component"]
+body:
+  - type: input
+    id: tag
+    attributes:
+      label: Tag name
+      placeholder: bk-json-viewer
+    validations:
+      required: true
+  - type: textarea
+    id: use-case
+    attributes:
+      label: Use case
+      description: What userscript scenario does this serve?
+    validations:
+      required: true
+  - type: textarea
+    id: api-sketch
+    attributes:
+      label: Proposed API
+      description: Attributes / properties / events / slots
+      render: markdown
+  - type: textarea
+    id: prior-art
+    attributes:
+      label: Prior art
+      description: Similar components in other libraries (if any)
