@@ -1,6 +1,6 @@
 {
   "name": "bonsai-kit",
-  "version": "0.0.11",
+  "version": "0.0.12",
   "description": "A standard Web Components UI kit for userscript authors — Shadow-DOM-isolated, zero-dependency primitives (floating panels, FABs, dock bars, settings, toasts, dialogs) that work safely inside any host page. Tampermonkey / Violentmonkey / Greasemonkey ready.",
   "type": "module",
   "main": "./src/index.js",
