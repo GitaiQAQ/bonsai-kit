@@ -3,7 +3,7 @@
 // @namespace    bonsai-kit
 // @version      0.0.4
 // @description  Inspect VMOK modules on any page — powered by bonsai-kit
-// @match        *://*/*
+// @match        https://ads.tiktok.com/*
 // @run-at       document-end
 // @require      https://unpkg.com/bonsai-kit/dist/components/bk-resizable-panel.umd.min.js
 // @require      https://unpkg.com/bonsai-kit/dist/components/bk-module-list.umd.min.js

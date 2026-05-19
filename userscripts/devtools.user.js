@@ -3,7 +3,7 @@
 // @namespace    bonsai-kit
 // @version      0.0.3
 // @description  Full devtools panel — FAB, dock bar, VMOK inspector, settings, toasts — powered by bonsai-kit
-// @match        *://*/*
+// @match        https://ads.tiktok.com/*
 // @run-at       document-end
 // @require      https://unpkg.com/bonsai-kit/dist/bonsai-kit.user.js
 // @grant        GM_setValue

@@ -3,7 +3,7 @@
 // @namespace    bonsai-kit
 // @version      0.0.9
 // @description  Inspect __TTAM_1MN_AUTO_WHITELIST_DEBUG__ on any page — powered by bonsai-kit
-// @match        *://*/*
+// @match        https://ads.tiktok.com/*
 // @run-at       document-end
 // @require      https://unpkg.com/bonsai-kit/dist/components/bk-resizable-panel.umd.min.js
 // @require      https://unpkg.com/bonsai-kit/dist/components/bk-module-list.umd.min.js
